@@ -7,4 +7,6 @@ router.post("/signup", AuthController.signup);
 
 router.post("/signin", AuthController.signin);
 
+router.post("/google", AuthController.google);
+
 export const AuthRoutes = router;

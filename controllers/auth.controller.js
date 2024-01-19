@@ -71,4 +71,55 @@ const signin = async (req, res, next) => {
   }
 };
 
-export const AuthController = { signup, signin };
+const google = async (req, res, next) => {
+  const { name, email, googlePhotoUrl } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      const token = jwt.sign(
+        {
+          id: user._id,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "1D" }
+      );
+      const { password, ...restUserData } = user._doc;
+      res
+        .status(200)
+        .cookie("access-token", token, { httpOnly: true })
+        .json(restUserData);
+    } else {
+      const generatedPassword =
+        Math.random().toString(36).slice(-8) +
+        Math.random().toString(36).slice(-8);
+
+      const hashPassword = bcryptjs.hashSync(generatedPassword, 10);
+      const newUser = new User({
+        username:
+          name.toLowerCase().split(" ").join("") +
+          Math.random().toString(9).slice(-4),
+        email,
+        password: hashPassword,
+        profilePicture: googlePhotoUrl,
+      });
+
+      await newUser.save();
+      const { password, ...restUserData } = newUser._doc;
+      const token = jwt.sign(
+        {
+          id: user._id,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "1D" }
+      );
+      res
+        .status(200)
+        .cookie("access-token", token, { httpOnly: true })
+        .json(restUserData);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const AuthController = { signup, signin, google };

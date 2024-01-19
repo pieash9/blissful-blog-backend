@@ -24,6 +24,7 @@ const server = async () => {
 server();
 
 app.use("/api/v1/auth", AuthRoutes);
+
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal server error.";
