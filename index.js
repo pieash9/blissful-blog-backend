@@ -3,10 +3,13 @@ import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
 import { AuthRoutes } from "./routes/auth.route.js";
+import cookieParser from "cookie-parser";
+import { UserRoutes } from "./routes/user.route.js";
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 const port = 5000;
 
 const server = async () => {
@@ -24,6 +27,7 @@ const server = async () => {
 server();
 
 app.use("/api/v1/auth", AuthRoutes);
+app.use("/api/v1/user", UserRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

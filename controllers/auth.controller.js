@@ -64,7 +64,7 @@ const signin = async (req, res, next) => {
 
     res
       .status(200)
-      .cookie("access-token", token, { httpOnly: true })
+      .cookie("access_token", token, { httpOnly: true })
       .json(restUserData);
   } catch (error) {
     next(error);
@@ -86,7 +86,7 @@ const google = async (req, res, next) => {
       const { password, ...restUserData } = user._doc;
       res
         .status(200)
-        .cookie("access-token", token, { httpOnly: true })
+        .cookie("access_token", token, { httpOnly: true })
         .json(restUserData);
     } else {
       const generatedPassword =
@@ -114,7 +114,7 @@ const google = async (req, res, next) => {
       );
       res
         .status(200)
-        .cookie("access-token", token, { httpOnly: true })
+        .cookie("access_token", token, { httpOnly: true })
         .json(restUserData);
     }
   } catch (error) {
