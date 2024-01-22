@@ -57,8 +57,6 @@ const signin = async (req, res, next) => {
       .status(200)
       .cookie("access_token", token, {
         httpOnly: true,
-        sameSite: "None", // or "Lax" or "Strict" depending on your requirements
-        secure: false,
       })
       .json(rest);
   } catch (error) {
