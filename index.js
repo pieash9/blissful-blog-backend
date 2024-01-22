@@ -8,7 +8,13 @@ import { UserRoutes } from "./routes/user.route.js";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+const corsOptions = {
+  origin: "http://localhost:5173",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use(cookieParser());
 const port = 5000;
 
@@ -28,6 +34,10 @@ server();
 
 app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/user", UserRoutes);
+
+app.get("/", (req, res) => {
+  res.send("Server is running.");
+});
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
