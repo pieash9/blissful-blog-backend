@@ -32,7 +32,7 @@ const getPosts = async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 9;
     const sortDirection = req.query.order === "asc" ? 1 : -1;
 
-    const post = await Post.find({
+    const posts = await Post.find({
       ...(req.query.userId && { userId: req.query.userId }),
       ...(req.query.category && { category: req.query.category }),
       ...(req.query.slug && { slug: req.query.slug }),
@@ -59,10 +59,22 @@ const getPosts = async (req, res, next) => {
       createdAt: { $gt: oneMonthAgo },
     });
 
-    res.status(200).json({ totalPost, lastMonthPost, post });
+    res.status(200).json({ totalPost, lastMonthPost, posts });
   } catch (error) {
     next(error);
   }
 };
 
-export const PostControllers = { create, getPosts };
+const deletePost = async (req, res, next) => {
+  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+    return next(errorHandler(403, "You are not allowed to delete this post"));
+  }
+  try {
+    await Post.findByIdAndDelete(req.params.postId);
+    res.status(200).json("The post has been deleted");
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const PostControllers = { create, getPosts, deletePost };

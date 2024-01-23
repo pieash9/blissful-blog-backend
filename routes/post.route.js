@@ -8,4 +8,10 @@ router.post("/create", verifyToken, PostControllers.create);
 
 router.get("/getPosts", PostControllers.getPosts);
 
+router.delete(
+  "/deletePost/:postId/:userId",
+  verifyToken,
+  PostControllers.deletePost
+);
+
 export const PostRoutes = router;
