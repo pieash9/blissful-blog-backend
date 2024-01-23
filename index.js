@@ -2,9 +2,10 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
-import { AuthRoutes } from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
+import { AuthRoutes } from "./routes/auth.route.js";
 import { UserRoutes } from "./routes/user.route.js";
+import { PostRoutes } from "./routes/post.route.js";
 
 const app = express();
 app.use(express.json());
@@ -34,6 +35,7 @@ server();
 
 app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/user", UserRoutes);
+app.use("/api/v1/post", PostRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running.");
