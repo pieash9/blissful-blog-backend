@@ -14,4 +14,10 @@ router.delete(
   PostControllers.deletePost
 );
 
+router.put(
+  "/updatePost/:postId/:userId",
+  verifyToken,
+  PostControllers.updatePost
+);
+
 export const PostRoutes = router;
