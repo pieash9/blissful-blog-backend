@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.post("/create", verifyToken, PostControllers.create);
 
+router.get("/getPosts", PostControllers.getPosts);
+
 export const PostRoutes = router;
