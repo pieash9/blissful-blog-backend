@@ -11,5 +11,10 @@ router.put(
   verifyToken,
   CommentController.likeComment
 );
+router.put(
+  "/editComment/:commentId",
+  verifyToken,
+  CommentController.editComment
+);
 
 export const CommentRoutes = router;
