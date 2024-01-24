@@ -110,4 +110,26 @@ const getUsers = async (req, res, next) => {
   }
 };
 
-export const UserController = { updateUser, deleteUser, signout, getUsers };
+const getUser = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return next(errorHandler(400, "User not found."));
+    }
+    const { password, ...rest } = user._doc;
+
+    res.status(200).json(rest);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const UserController = {
+  updateUser,
+  deleteUser,
+  signout,
+  getUsers,
+  getUser,
+};
