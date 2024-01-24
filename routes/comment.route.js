@@ -16,5 +16,10 @@ router.put(
   verifyToken,
   CommentController.editComment
 );
+router.delete(
+  "/deleteComment/:commentId",
+  verifyToken,
+  CommentController.deleteComment
+);
 
 export const CommentRoutes = router;
