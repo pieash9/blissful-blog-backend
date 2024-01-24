@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import { AuthRoutes } from "./routes/auth.route.js";
 import { UserRoutes } from "./routes/user.route.js";
 import { PostRoutes } from "./routes/post.route.js";
+import { CommentRoutes } from "./routes/comment.route.js";
 
 const app = express();
 app.use(express.json());
@@ -36,6 +37,7 @@ server();
 app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/user", UserRoutes);
 app.use("/api/v1/post", PostRoutes);
+app.use("/api/v1/comment", CommentRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running.");
