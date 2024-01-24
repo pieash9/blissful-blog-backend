@@ -11,6 +11,7 @@ export const verifyToken = async (req, res, next) => {
       return next(errorHandler(401, "Unauthorized"));
     }
     req.user = user;
+
     next();
   });
 };
