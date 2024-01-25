@@ -90,7 +90,7 @@ const getUsers = async (req, res, next) => {
       const { password, ...rest } = user._doc;
       return rest;
     });
-    const totalUser = await User.countDocuments();
+    const totalUsers = await User.countDocuments();
 
     const now = new Date();
     const oneMonthAgo = new Date(
@@ -98,13 +98,13 @@ const getUsers = async (req, res, next) => {
       now.getMonth() - 1,
       now.getDay()
     );
-    const lastMonthUser = await User.countDocuments({
+    const lastMonthUsers = await User.countDocuments({
       createdAt: { $gte: oneMonthAgo },
     });
 
     res
       .status(200)
-      .json({ totalUser, lastMonthUser, users: userWithoutPassword });
+      .json({ totalUsers, lastMonthUsers, users: userWithoutPassword });
   } catch (error) {
     next(error);
   }
