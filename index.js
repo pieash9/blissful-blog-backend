@@ -17,7 +17,7 @@ app.use(
     origin: [
       "https://blissfull-blog.netlify.app",
       "http://localhost:5000",
-      "https://blissful-blog.vercel.app/",
+      "https://blissful-blog.vercel.app",
     ],
     credentials: true, // Include if you're using credentials (e.g., cookies, authentication)
   })
