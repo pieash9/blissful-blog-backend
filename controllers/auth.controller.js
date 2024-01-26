@@ -61,6 +61,7 @@ const signin = async (req, res, next) => {
       .status(200)
       .cookie("access_token", token, {
         httpOnly: true,
+        path: "/",
         secure: process.env.NODE_ENV === "production",
       })
       .json(rest);
@@ -83,6 +84,7 @@ const google = async (req, res, next) => {
         .status(200)
         .cookie("access_token", token, {
           httpOnly: true,
+          path: "/",
           secure: process.env.NODE_ENV === "production",
         })
         .json(rest);
@@ -109,6 +111,7 @@ const google = async (req, res, next) => {
         .status(200)
         .cookie("access_token", token, {
           httpOnly: true,
+          path: "/",
           secure: process.env.NODE_ENV === "production",
         })
         .json(rest);
