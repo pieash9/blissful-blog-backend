@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { User } from "../model/user.model.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
@@ -60,6 +61,7 @@ const signin = async (req, res, next) => {
       .status(200)
       .cookie("access_token", token, {
         httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
       })
       .json(rest);
   } catch (error) {
@@ -81,6 +83,7 @@ const google = async (req, res, next) => {
         .status(200)
         .cookie("access_token", token, {
           httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
         })
         .json(rest);
     } else {
@@ -106,6 +109,7 @@ const google = async (req, res, next) => {
         .status(200)
         .cookie("access_token", token, {
           httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
         })
         .json(rest);
     }

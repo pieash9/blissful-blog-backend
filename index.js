@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -13,7 +14,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://blissfull-blog.netlify.app",
+    origin: ["https://blissfull-blog.netlify.app", "http://localhost:5000"],
     credentials: true, // Include if you're using credentials (e.g., cookies, authentication)
   })
 );

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { User } from "../model/user.model.js";
 import { errorHandler } from "../utils/error.js";
 import bcryptjs from "bcryptjs";
